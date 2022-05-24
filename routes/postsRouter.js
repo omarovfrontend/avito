@@ -47,4 +47,26 @@ router.delete('/delete/:id', async (req, res) => {
   res.json({ isUpdatedSuccessful: true });
 });
 
+// ручка для изменения поста
+router.put('/edit/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      postName, categoryName, img, description,
+    } = req.body;
+
+    let cat = await Category.findOne({ where: { name: categoryName } });
+    if (!cat) {
+      cat = await Category.create({ name: categoryName });
+    }
+    await Post.update({
+      title: postName, category_id: cat.id, img, description, user_id: req.session.userId,
+    }, { where: { id } });
+    const testPost = await Post.findByPk(id);
+    res.json(testPost);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
