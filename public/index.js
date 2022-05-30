@@ -112,6 +112,7 @@ myPosts.addEventListener('click', async (event) => {
     if (response.ok) {
       targetDiv.remove();
     }
+    // ручка для изменения поста
   } else if (event.target.id === 'edit') {
     const { editPost } = document.forms;
     const editId = event.target.parentNode.dataset.id;
