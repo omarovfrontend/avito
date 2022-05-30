@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Category, Post } = require('../db/models');
+const { Category, User, Post } = require('../db/models');
 const checkAuth = require('../middleware/checkAuth');
 
 router.post('/add', checkAuth, async (req, res) => {
@@ -21,13 +21,16 @@ router.post('/add', checkAuth, async (req, res) => {
     const newPost = await Post.create(
       {
         title: postName,
+        // category: categoryName,
         description,
         img,
         category_id: categoryAdd.id,
         user_id: req.session.userId,
       },
     );
-    res.json({ category: newPost.category_id, name: req.session.name, id: newPost.id });
+    const user = await User.findByPk(req.session.userId);
+    // res.json({ category: newPost.category_id, name: req.session.name, id: newPost.id });
+    res.json({ newPost, user, categoryAdd });
   } catch (error) {
     res.send('Упппссс, не вышло!');
   }
@@ -60,7 +63,12 @@ router.put('/edit/:id', async (req, res) => {
       cat = await Category.create({ name: categoryName });
     }
     await Post.update({
-      title: postName, category_id: cat.id, img, description, user_id: req.session.userId,
+      title: postName,
+      // category: categoryName,
+      category_id: cat.id,
+      img,
+      description,
+      user_id: req.session.userId,
     }, { where: { id } });
     const testPost = await Post.findByPk(id);
     res.json(testPost);
