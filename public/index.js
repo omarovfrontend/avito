@@ -15,9 +15,6 @@ function insertPost(result) {
       <p class="description-post">
         Описание поста: ${result.newPost.description}
       </p>
-      <p>
-        Пользователь: ${result.user.name}
-      </p>
 
       <div data-dataId="${result.newPost.id}" class="posts-inner">
         <button data-type="delete" id="delete" class="posts_delete-btn">Удалить</button>
@@ -142,3 +139,10 @@ myPosts.addEventListener('click', async (event) => {
     }
   }
 });
+
+// SIGNUP MESSAGE
+// const message = document.querySelector('.signup_message');
+// function message() {
+
+// }
+// setTimeout(message, 5000);

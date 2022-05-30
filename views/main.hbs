@@ -36,13 +36,11 @@
         <p class="category-post">
           Категория поста: {{'Category.name'}}
         </p>
-        <img class="img-post" style="width: 250px;" src={{this.img}} alt="photo">
+        <img class="img-post" src={{this.img}} alt="photo">
         <p class="description-post">
           Описание поста: {{this.description}}
         </p>
-        <p>
-          Пользователь: {{'User.name'}}
-        </p>
+
         {{#if owner}}
         <div data-dataId="{{this.id}}" class="posts-inner">
           <button data-type="delete" id="delete" class="posts_delete-btn">Удалить</button>
@@ -57,7 +55,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Редактирование поста: ╮( ˘ _ ˘ )╭</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div data-id="{{this.id}}" class="modal-body">
