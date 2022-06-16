@@ -1,0 +1,104 @@
+{{!-- method="post" значит в mainRouter пишем router.post ... --}}
+{{#if userId}}
+<div class="wrapper_form">
+
+  <form name="addPost" class="addPost">
+    <div class="addPost_card">
+      <label for="name" class="form-label">Название Поста:</label>
+	    <input class="input" required="required" type="text" name="postName" placeholder="name..." />
+    </div>
+
+    <div class="addPost_card">
+      <label for="name" class="form-label">Категория Поста:</label>
+	    <input class="input" required="required" type="text" name="categoryName" placeholder="name..." />
+    </div>
+
+    <div class="addPost_card">
+      <label for="name" class="form-label">Ссылка на картинку:</label>
+	    <input class="input" required="required" type="text" name="img" placeholder="вставьте ссылку..." />
+    </div>
+
+    <div class="addPost_card">
+      <label for="name" class="form-label">Описание Поста:</label>
+	    <input class="input" required="required" type="text" name="description" placeholder="description..." />
+    </div>
+
+    <button class="addPost_button" type="submit">Добавить</button>
+  </form>
+  
+
+  <div class="myPosts">
+    {{#each posts}}
+      <div class="posts">
+        <p class="title-post">
+          Название поста: {{this.title}}
+        </p>
+        <p class="category-post">
+          Категория поста: {{'Category.name'}}
+        </p>
+        <img class="img-post" src={{this.img}} alt="photo">
+        <p class="description-post">
+          Описание поста: {{this.description}}
+        </p>
+
+        {{#if owner}}
+        <div data-dataId="{{this.id}}" class="posts-inner">
+          <button data-type="delete" id="delete" class="posts_delete-btn">Удалить</button>
+
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Изменить
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Редактирование поста: ╮( ˘ _ ˘ )╭</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div data-id="{{this.id}}" class="modal-body">
+        
+                  <form name="editPost" class="editPost">
+                    <div class="addPost_card">
+                      <label for="name" class="form-label">Название Поста:</label>
+  	                  <input class="input" required="required" type="text" name="postName" placeholder="name..." />
+                    </div>
+
+                    <div class="addPost_card">
+                      <label for="name" class="form-label">Категория Поста:</label>
+  	                  <input class="input" required="required" type="text" name="categoryName" placeholder="name..." />
+                    </div>
+
+                    <div class="addPost_card">
+                      <label for="name" class="form-label">Ссылка на картинку:</label>
+  	                  <input class="input" required="required" type="text" name="img" placeholder="вставьте ссылку..." />
+                    </div>
+
+                    <div class="addPost_card">
+                      <label for="name" class="form-label">Описание Поста:</label>
+  	                  <input class="input" required="required" type="text" name="description" placeholder="description..." />
+                    </div>
+
+                    <div data-id="{{this.id}}" class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                      <button type="button" class="btn btn-primary" id="edit" data-bs-dismiss="modal">Сохранить</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        {{else}}
+      
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+
+</div>
+{{/if}}
